@@ -28,9 +28,23 @@ import CoreMotion
 class GameScene: SKScene {
   
   // Private GameScene Properties
-  
-  var contentCreated = false
     
+    var contentCreated = false
+
+    // 1 begin moving to the right
+    var invaderMovementDirection: InvaderMovementDirection = .right
+    //2 havent moved yet so start time at 0
+    var timeOfLastMove: CFTimeInterval = 0.0
+    // 3 invaders take 1 second for each move
+    let timePerMove: CFTimeInterval = 1.0
+    
+    enum InvaderMovementDirection {
+        case right
+        case left
+        case downThenRight
+        case downThenLeft
+        case none
+    }
     enum InvaderType{
         case a
         case b
@@ -50,6 +64,8 @@ class GameScene: SKScene {
     let kInvaderColCount = 6
     let kShipSize = CGSize(width: 30, height: 16)
     let kShipName = "ship"
+    let kScoreHudName = "scoreHud"
+    let kHealthHudName = "healthHud"
   
   // Object Lifecycle Management
   
@@ -69,9 +85,12 @@ class GameScene: SKScene {
         //    self.addChild(invader)
         
         setupInvaders()
+        setupShip()
+        setupHud()
         // black space color
         self.backgroundColor = SKColor.black
     }
+    //MARK: Invader
     func makeInvader(ofType invaderType: InvaderType) -> SKNode {
         //1 determines the color type
         var invaderColor: SKColor
@@ -124,19 +143,128 @@ class GameScene: SKScene {
             }
         }
     }
+    //MARK: Ship
+    func setupShip() {
+        // 1 creates the ship can be reused if the ship gets destroyed
+        let ship = makeShip()
+        
+        // 2 place ship on screen
+        ship.position = CGPoint(x: size.width / 2.0, y: kShipSize.height / 2.0 )
+        addChild(ship)
+    }
     
+    func makeShip() -> SKNode {
+        let ship = SKSpriteNode(color: SKColor.green, size: kShipSize)
+        ship.name = kShipName
+        return ship
+    }
+    
+    //MARK: Hud
+    // boilerplate code for creating and adding text labels
+    func setupHud() {
+        // 1 score label name
+        let scoreLabel = SKLabelNode(fontNamed: "courier")
+        scoreLabel.name = kScoreHudName
+        scoreLabel.fontSize = 25
+        
+        // 2 color of score label
+        scoreLabel.fontColor = SKColor.green
+        scoreLabel.text = String(format: "Score: %04u",0)
+        
+        // 3 position of score label
+        scoreLabel.position = CGPoint(
+            x: frame.size.width / 2,
+            y: size.height - (40 + scoreLabel.frame.size.height/2)
+        )
+        addChild(scoreLabel)
+        
+        // 4 health label name
+        let healthLabel = SKLabelNode(fontNamed: "Courier")
+        healthLabel.name = kHealthHudName
+        healthLabel.fontSize = 25
+        
+        // 5 color of health label
+        healthLabel.fontColor = SKColor.red
+        healthLabel.text = String(format: "Health: %.1f%%", 100.0)
+        
+        // 6 postion of health label
+        healthLabel.position = CGPoint(
+            x: frame.size.width / 2,
+            y: size.height - (80 + healthLabel.frame.size.height/2)
+        )
+        addChild(healthLabel)
+    }
     
     
 
   // Scene Update
-  
+    func moveInvaders(forUpdate currentTime: CFTimeInterval) {
+        // 1 if its not time to move then dont do the rest of this func yet
+        if (currentTime - timeOfLastMove < timePerMove) {
+            return
+        }
+        
+        // 2 loop stuff
+        enumerateChildNodes(withName: InvaderType.name) { node, stop in switch self.invaderMovementDirection {
+            case .right:
+                node.position = CGPoint(x: node.position.x + 10, y: node.position.y)
+            case .left:
+                node.position = CGPoint(x: node.position.x - 10, y: node.position.y)
+            case .downThenLeft, .downThenRight:
+                node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
+            case .none:
+                break
+            }
+            
+            // 3 record that invaders moved
+            self.timeOfLastMove = currentTime
+        }
+    }
   override func update(_ currentTime: TimeInterval) {
     /* Called before each frame is rendered */
+    moveInvaders(forUpdate: currentTime)
   }
   
   // Scene Update Helpers
   
   // Invader Movement Helpers
+    func determineInvaderMovementDirection() {
+        // 1
+        var proposedMovementDirection: InvaderMovementDirection = invaderMovementDirection
+        
+        // 2
+        enumerateChildNodes(withName: InvaderType.name) { node, stop in switch self.invaderMovementDirection {
+            case .right:
+                // 3
+                if (node.frame.maxX >= node.scene!.size.width - 1.0) {
+                    proposedMovementDirection = .downThenLeft
+                    
+                    stop.pointee = true
+                }
+            case .left:
+                //4
+                if (node.frame.minX <= 1.0) {
+                    proposedMovementDirection = .downThenRight
+                    
+                    stop.pointee = true
+            }
+            case .downThenLeft:
+                proposedMovementDirection = .left
+                stop.pointee = true
+        case .downThenRight:
+            proposedMovementDirection = .right
+            stop.pointee = true
+        
+        default:
+            break
+            }
+        }
+        
+        // 7
+        if (proposedMovementDirection != invaderMovementDirection) {
+            invaderMovementDirection = proposedMovementDirection
+        }
+    }
   
   // Bullet Helpers
   
