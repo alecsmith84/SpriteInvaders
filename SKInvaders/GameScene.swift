@@ -27,6 +27,8 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
   
+    
+    
   // Private GameScene Properties
     let kMinInvaderBottomHeight: Float = 32.0
     var gameEnding: Bool = false
@@ -95,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   // Scene Setup and Content Creation
   override func didMove(to view: SKView) {
-    
+
     if (!self.contentCreated) {
         self.createContent()
         motionManager.startAccelerometerUpdates()
@@ -115,7 +117,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupShip()
         setupHud()
         // black space color
-        self.backgroundColor = SKColor.black
+        let background = SKSpriteNode(imageNamed: "Bkg")
+        background.zPosition = -1
+        background.position = CGPoint(x: size.width/2, y: size.height/2)
+        addChild(background)
     }
     //MARK: Invader
     func loadInvaderTextures(ofType invaderType: InvaderType) -> [SKTexture] {
@@ -227,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 1 score label name
         let scoreLabel = SKLabelNode(fontNamed: "courier")
         scoreLabel.name = kScoreHudName
-        scoreLabel.fontSize = 25
+        scoreLabel.fontSize = 16
         
         // 2 color of score label
         scoreLabel.fontColor = SKColor.green
@@ -235,15 +240,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 3 position of score label
         scoreLabel.position = CGPoint(
-            x: frame.size.width / 2,
-            y: size.height - (40 + scoreLabel.frame.size.height/2)
+            x: 60,
+            y: size.height - (40 + scoreLabel.frame.size.height)
         )
         addChild(scoreLabel)
         
         // 4 health label name
         let healthLabel = SKLabelNode(fontNamed: "Courier")
         healthLabel.name = kHealthHudName
-        healthLabel.fontSize = 25
+        healthLabel.fontSize = 16
         
         // 5 color of health label
         healthLabel.fontColor = SKColor.red
@@ -251,8 +256,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 6 postion of health label
         healthLabel.position = CGPoint(
-            x: frame.size.width / 2,
-            y: size.height - (80 + healthLabel.frame.size.height/2)
+            x: frame.size.width - 100,
+            y: size.height - (40 + healthLabel.frame.size.height)
         )
         addChild(healthLabel)
     }
