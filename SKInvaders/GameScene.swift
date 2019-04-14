@@ -30,6 +30,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
   // Private GameScene Properties
+    
+    var ship = SKSpriteNode(imageNamed: "Ship.png")
+    
+    //var playerSize = CGSize(width: 50, height: 50)
+    
+    
     let kMinInvaderBottomHeight: Float = 32.0
     var gameEnding: Bool = false
     
@@ -97,24 +103,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   // Scene Setup and Content Creation
   override func didMove(to view: SKView) {
-
+    
     if (!self.contentCreated) {
         self.createContent()
         motionManager.startAccelerometerUpdates()
     }
     physicsWorld.contactDelegate = self
+    
+    spawnPlayer()
     }
     func createContent() {
         
-        //    let invader = SKSpriteNode(imageNamed: "InvaderA_00.png")
-        //
-        //    invader.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        //
-        //    self.addChild(invader)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         physicsBody!.categoryBitMask = kSceneEdgeCategory
         setupInvaders()
-        setupShip()
+        //setupShip()
         setupHud()
         // black space color
         let background = SKSpriteNode(imageNamed: "Bkg")
@@ -195,19 +198,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     //MARK: Ship
-    func setupShip() {
-        // 1 creates the ship can be reused if the ship gets destroyed
-        let ship = makeShip()
-        
-        // 2 place ship on screen
-        ship.position = CGPoint(x: size.width / 2.0, y: kShipSize.height / 2.0 )
-        addChild(ship)
+    func spawnPlayer() {
+        ship = makeShip() as! SKSpriteNode
+        ship.position = CGPoint(x: size.width / 2, y: 100)
+        self.addChild(ship)
+       
     }
-    
+//    func setupShip() {
+//        // 1 creates the ship can be reused if the ship gets destroyed
+//        let ship = makeShip()
+//
+//        // 2 place ship on screen
+//        ship.position = CGPoint(x: size.width / 2.0, y: kShipSize.height / 2.0 )
+//        addChild(ship)
+//    }
+//
     func makeShip() -> SKNode {
         let ship = SKSpriteNode(imageNamed: "Ship.png")
         ship.name = kShipName
-        
+
+
         // 1 creates rectangular physics body
         ship.physicsBody = SKPhysicsBody(rectangleOf: ship.frame.size)
         // 2 makes shape dynamic to allow collisions
@@ -216,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ship.physicsBody!.affectedByGravity = false
         // 4 give mass so it moves naturally
         ship.physicsBody!.mass = 0.02
-        
+
         // 1 set ship
         ship.physicsBody!.categoryBitMask = kShipCategory
         // 2 dont detect contact between ship and other physics bodies
@@ -225,6 +235,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ship.physicsBody!.collisionBitMask = kSceneEdgeCategory
         return ship
     }
+//
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            ship.position.x = location.x
+            ship.position.y = location.y
+        }
+    }
+    
+    
+    
+    
     
     //MARK: Hud
     // boilerplate code for creating and adding text labels
@@ -332,21 +354,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.timeOfLastMove = currentTime
         }
     }
+    //MARK: Move the things
+//    // accelerometer
+//    func processUserMotion(forUpdate currentTime: CFTimeInterval) {
+//        // 1 get ship form scene
+//        if let ship = childNode(withName: kShipName) as? SKSpriteNode {
+//            //2 get accelerometer data
+//            if let data = motionManager.accelerometerData {
+//                //3 if facing up tilting adds accel
+//                if fabs(data.acceleration.x) > 0.2 {
+//                    // 4 how do you move the ship?
+//                    //print("Acceleration: \(data.acceleration.x)")
+//                    ship.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
+//                }
+//            }
+//        }
+//    }
     
-    func processUserMotion(forUpdate currentTime: CFTimeInterval) {
-        // 1 get ship form scene
-        if let ship = childNode(withName: kShipName) as? SKSpriteNode {
-            //2 get accelerometer data
-            if let data = motionManager.accelerometerData {
-                //3 if facing up tilting adds accel
-                if fabs(data.acceleration.x) > 0.2 {
-                    // 4 how do you move the ship?
-                    //print("Acceleration: \(data.acceleration.x)")
-                    ship.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
-                }
-            }
-        }
-    }
     
     func fireInvaderBullets(forUpdate currentTime: CFTimeInterval) {
         let existingBullet = childNode(withName: kInvaderFiredBulletName)
@@ -390,7 +414,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     if isGameOver(){
         endGame()
     }
-    processUserMotion(forUpdate: currentTime)
+    //processUserMotion(forUpdate: currentTime)
     moveInvaders(forUpdate: currentTime)
     processUserTaps(forUpdate: currentTime)
     fireInvaderBullets(forUpdate: currentTime)
@@ -578,36 +602,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         func isGameOver() -> Bool {
             // 1 get random invader from the scene
             let invader = childNode(withName: InvaderType.name)
-            
+
             // 2 iterate through invaders to check if any are too low
             var invaderTooLow = false
             enumerateChildNodes(withName: InvaderType.name) {
                 node, stop in
-                
+
                 if (Float(node.frame.minY) <= self.kMinInvaderBottomHeight) {
                     invaderTooLow = true
                     stop.pointee = true
                 }
             }
-            
+
             // 3 get pointer to your ship if health < 0 player = dead
             let ship = childNode(withName: kShipName)
-            
+
             // 4 return if game is over if no more invaders or invader is too low or ship destroyed
             return invader == nil || invaderTooLow || ship == nil
         }
-    
+
         func endGame() {
             // 1 end game onece
             if !gameEnding {
                 gameEnding = true
-                
+
                 // 2 stop accelerometer
                 motionManager.stopAccelerometerUpdates()
-                
+
                 // 3 show game over scene
                 let gameOverScene: GameOverScene = GameOverScene(size: size)
-                
+
                 view?.presentScene(gameOverScene, transition: SKTransition.doorsOpenHorizontal(withDuration: 1.0))
             }
         }
