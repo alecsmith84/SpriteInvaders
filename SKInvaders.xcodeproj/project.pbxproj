@@ -11,7 +11,6 @@
 		CDF079D41975428800FFAB46 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF079D31975428800FFAB46 /* GameScene.swift */; };
 		CDF079D61975428800FFAB46 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF079D51975428800FFAB46 /* GameViewController.swift */; };
 		CDF079D91975428800FFAB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF079D71975428800FFAB46 /* Main.storyboard */; };
-		CDF079DB1975428800FFAB46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF079DA1975428800FFAB46 /* Images.xcassets */; };
 		CDF07A061975453100FFAB46 /* AssetLicensingNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F11975453100FFAB46 /* AssetLicensingNotes.txt */; };
 		CDF07A071975453100FFAB46 /* InvaderBullet.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F31975453100FFAB46 /* InvaderBullet.wav */; };
 		CDF07A081975453100FFAB46 /* InvaderHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F41975453100FFAB46 /* InvaderHit.wav */; };
@@ -19,19 +18,14 @@
 		CDF07A0A1975453100FFAB46 /* ShipHit.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F61975453100FFAB46 /* ShipHit.wav */; };
 		CDF07A0B1975453100FFAB46 /* InvaderA_00.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F81975453100FFAB46 /* InvaderA_00.png */; };
 		CDF07A0C1975453100FFAB46 /* InvaderA_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079F91975453100FFAB46 /* InvaderA_00@2x.png */; };
-		CDF07A0D1975453100FFAB46 /* InvaderA_01.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FA1975453100FFAB46 /* InvaderA_01.png */; };
-		CDF07A0E1975453100FFAB46 /* InvaderA_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FB1975453100FFAB46 /* InvaderA_01@2x.png */; };
 		CDF07A0F1975453100FFAB46 /* InvaderB_00.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FC1975453100FFAB46 /* InvaderB_00.png */; };
 		CDF07A101975453100FFAB46 /* InvaderB_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FD1975453100FFAB46 /* InvaderB_00@2x.png */; };
-		CDF07A111975453100FFAB46 /* InvaderB_01.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FE1975453100FFAB46 /* InvaderB_01.png */; };
-		CDF07A121975453100FFAB46 /* InvaderB_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF079FF1975453100FFAB46 /* InvaderB_01@2x.png */; };
 		CDF07A131975453100FFAB46 /* InvaderC_00.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A001975453100FFAB46 /* InvaderC_00.png */; };
 		CDF07A141975453100FFAB46 /* InvaderC_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A011975453100FFAB46 /* InvaderC_00@2x.png */; };
-		CDF07A151975453100FFAB46 /* InvaderC_01.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A021975453100FFAB46 /* InvaderC_01.png */; };
-		CDF07A161975453100FFAB46 /* InvaderC_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A031975453100FFAB46 /* InvaderC_01@2x.png */; };
 		CDF07A171975453100FFAB46 /* Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A041975453100FFAB46 /* Ship.png */; };
 		CDF07A181975453100FFAB46 /* Ship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF07A051975453100FFAB46 /* Ship@2x.png */; };
 		CDF07A1A1975510100FFAB46 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF07A191975510100FFAB46 /* GameOverScene.swift */; };
+		D42F9F6F2264C216006E649C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42F9F6E2264C216006E649C /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +35,6 @@
 		CDF079D31975428800FFAB46 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		CDF079D51975428800FFAB46 /* GameViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
 		CDF079D81975428800FFAB46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CDF079DA1975428800FFAB46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CDF079F11975453100FFAB46 /* AssetLicensingNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AssetLicensingNotes.txt; sourceTree = "<group>"; };
 		CDF079F31975453100FFAB46 /* InvaderBullet.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = InvaderBullet.wav; sourceTree = "<group>"; };
 		CDF079F41975453100FFAB46 /* InvaderHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = InvaderHit.wav; sourceTree = "<group>"; };
@@ -49,19 +42,14 @@
 		CDF079F61975453100FFAB46 /* ShipHit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ShipHit.wav; sourceTree = "<group>"; };
 		CDF079F81975453100FFAB46 /* InvaderA_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderA_00.png; sourceTree = "<group>"; };
 		CDF079F91975453100FFAB46 /* InvaderA_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderA_00@2x.png"; sourceTree = "<group>"; };
-		CDF079FA1975453100FFAB46 /* InvaderA_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderA_01.png; sourceTree = "<group>"; };
-		CDF079FB1975453100FFAB46 /* InvaderA_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderA_01@2x.png"; sourceTree = "<group>"; };
 		CDF079FC1975453100FFAB46 /* InvaderB_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderB_00.png; sourceTree = "<group>"; };
 		CDF079FD1975453100FFAB46 /* InvaderB_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderB_00@2x.png"; sourceTree = "<group>"; };
-		CDF079FE1975453100FFAB46 /* InvaderB_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderB_01.png; sourceTree = "<group>"; };
-		CDF079FF1975453100FFAB46 /* InvaderB_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderB_01@2x.png"; sourceTree = "<group>"; };
 		CDF07A001975453100FFAB46 /* InvaderC_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderC_00.png; sourceTree = "<group>"; };
 		CDF07A011975453100FFAB46 /* InvaderC_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderC_00@2x.png"; sourceTree = "<group>"; };
-		CDF07A021975453100FFAB46 /* InvaderC_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderC_01.png; sourceTree = "<group>"; };
-		CDF07A031975453100FFAB46 /* InvaderC_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvaderC_01@2x.png"; sourceTree = "<group>"; };
 		CDF07A041975453100FFAB46 /* Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ship.png; sourceTree = "<group>"; };
 		CDF07A051975453100FFAB46 /* Ship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ship@2x.png"; sourceTree = "<group>"; };
 		CDF07A191975510100FFAB46 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		D42F9F6E2264C216006E649C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +88,8 @@
 				CDF079D51975428800FFAB46 /* GameViewController.swift */,
 				CDF07A191975510100FFAB46 /* GameOverScene.swift */,
 				CDF079D71975428800FFAB46 /* Main.storyboard */,
-				CDF079DA1975428800FFAB46 /* Images.xcassets */,
 				CDF079CD1975428800FFAB46 /* Supporting Files */,
+				D42F9F6E2264C216006E649C /* Images.xcassets */,
 			);
 			path = SKInvaders;
 			sourceTree = "<group>";
@@ -140,16 +128,10 @@
 			children = (
 				CDF079F81975453100FFAB46 /* InvaderA_00.png */,
 				CDF079F91975453100FFAB46 /* InvaderA_00@2x.png */,
-				CDF079FA1975453100FFAB46 /* InvaderA_01.png */,
-				CDF079FB1975453100FFAB46 /* InvaderA_01@2x.png */,
 				CDF079FC1975453100FFAB46 /* InvaderB_00.png */,
 				CDF079FD1975453100FFAB46 /* InvaderB_00@2x.png */,
-				CDF079FE1975453100FFAB46 /* InvaderB_01.png */,
-				CDF079FF1975453100FFAB46 /* InvaderB_01@2x.png */,
 				CDF07A001975453100FFAB46 /* InvaderC_00.png */,
 				CDF07A011975453100FFAB46 /* InvaderC_00@2x.png */,
-				CDF07A021975453100FFAB46 /* InvaderC_01.png */,
-				CDF07A031975453100FFAB46 /* InvaderC_01@2x.png */,
 				CDF07A041975453100FFAB46 /* Ship.png */,
 				CDF07A051975453100FFAB46 /* Ship@2x.png */,
 			);
@@ -217,20 +199,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF07A0A1975453100FFAB46 /* ShipHit.wav in Resources */,
-				CDF079DB1975428800FFAB46 /* Images.xcassets in Resources */,
 				CDF07A181975453100FFAB46 /* Ship@2x.png in Resources */,
 				CDF07A171975453100FFAB46 /* Ship.png in Resources */,
-				CDF07A0D1975453100FFAB46 /* InvaderA_01.png in Resources */,
 				CDF07A081975453100FFAB46 /* InvaderHit.wav in Resources */,
-				CDF07A0E1975453100FFAB46 /* InvaderA_01@2x.png in Resources */,
-				CDF07A111975453100FFAB46 /* InvaderB_01.png in Resources */,
-				CDF07A161975453100FFAB46 /* InvaderC_01@2x.png in Resources */,
 				CDF07A061975453100FFAB46 /* AssetLicensingNotes.txt in Resources */,
 				CDF07A131975453100FFAB46 /* InvaderC_00.png in Resources */,
-				CDF07A151975453100FFAB46 /* InvaderC_01.png in Resources */,
+				D42F9F6F2264C216006E649C /* Images.xcassets in Resources */,
 				CDF07A101975453100FFAB46 /* InvaderB_00@2x.png in Resources */,
 				CDF07A0B1975453100FFAB46 /* InvaderA_00.png in Resources */,
-				CDF07A121975453100FFAB46 /* InvaderB_01@2x.png in Resources */,
 				CDF07A0C1975453100FFAB46 /* InvaderA_00@2x.png in Resources */,
 				CDF07A091975453100FFAB46 /* ShipBullet.wav in Resources */,
 				CDF07A141975453100FFAB46 /* InvaderC_00@2x.png in Resources */,

@@ -91,6 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let kShipSize = CGSize(width: 30, height: 16)
     let kShipName = "ship"
     let kScoreHudName = "scoreHud"
+    let kHighScoreHudName = "highScoreHud"
     let kHealthHudName = "healthHud"
     
     let kInvaderCategory: UInt32 = 0x1 << 0
@@ -140,8 +141,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // 1 loads pair of sprites for each invader type
+        // mod removes the need to change sprites
         return [SKTexture(imageNamed: String(format: "%@_00.png", prefix)),
-                SKTexture(imageNamed: String(format: "%@_01.png", prefix))]
+                SKTexture(imageNamed: String(format: "%@_00.png", prefix))]
     }
     
     func makeInvader(ofType invaderType: InvaderType) -> SKNode {
@@ -200,7 +202,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: Ship
     func spawnPlayer() {
         ship = makeShip() as! SKSpriteNode
-        ship.position = CGPoint(x: size.width / 2, y: 100)
+        ship.position = CGPoint(x: size.width / 2, y: 50)
         self.addChild(ship)
        
     }
@@ -235,12 +237,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ship.physicsBody!.collisionBitMask = kSceneEdgeCategory
         return ship
     }
-//
+
+    //MARK: Mod 1 change tilt to touch controls
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             ship.position.x = location.x
-            ship.position.y = location.y
+            
         }
     }
     
@@ -259,13 +262,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2 color of score label
         scoreLabel.fontColor = SKColor.green
         scoreLabel.text = String(format: "Score: %04u",0)
-        
+    
         // 3 position of score label
         scoreLabel.position = CGPoint(
             x: 60,
             y: size.height - (40 + scoreLabel.frame.size.height)
         )
         addChild(scoreLabel)
+        
+        //MARK: Mod 2 add high score tally
+        // 1.5 high score mod
+        let highScoreLabel = SKLabelNode(fontNamed: "courier")
+        highScoreLabel.name = kHighScoreHudName
+        highScoreLabel.fontSize = 16
+        
+        // 2.5 color of  label
+        highScoreLabel.fontColor = SKColor.green
+        highScoreLabel.text = String(format: "High Score: %04u",0)
+        
+        // 3.5 position of label
+        highScoreLabel.position = CGPoint(
+            x: 100,
+            y: size.height - (50 + highScoreLabel.frame.size.height)
+        )
+        addChild(highScoreLabel)
+        
         
         // 4 health label name
         let healthLabel = SKLabelNode(fontNamed: "Courier")
@@ -289,6 +310,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let score = childNode(withName: kScoreHudName) as? SKLabelNode {
             score.text = String(format: "Score: %05u", self.score)
         }
+        
+        
     }
     func adjustShipHealth(by healthAdjustment: Float) {
         // 1 makes sure it does not go negative
@@ -304,6 +327,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch bulletType {
         case .shipFired:
+            // change to to an image
             bullet = SKSpriteNode(color: SKColor.green, size: kBulletSize)
             bullet.name = kShipFiredBulletName
             
@@ -315,6 +339,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             bullet.physicsBody!.collisionBitMask = 0x0
             
         case .invaderFired:
+            // change this to an image
             bullet = SKSpriteNode(color: SKColor.magenta, size: kBulletSize)
             bullet.name = kInvaderFiredBulletName
             
@@ -622,6 +647,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         func endGame() {
+            
+            
             // 1 end game onece
             if !gameEnding {
                 gameEnding = true

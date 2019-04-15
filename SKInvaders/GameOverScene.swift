@@ -60,8 +60,9 @@ class GameOverScene: SKScene {
         
         // black space color
         self.backgroundColor = SKColor.black
-
     }
+    
+    
     
 
     
