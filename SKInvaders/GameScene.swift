@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameEnding: Bool = false
     
     var score: Int = 0
+    var highscore: Int = 0
     var shipHealth: Float = 1.0
     
     var contactQueue = [SKPhysicsContact]()
@@ -282,8 +283,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 3.5 position of label
         highScoreLabel.position = CGPoint(
-            x: 100,
-            y: size.height - (50 + highScoreLabel.frame.size.height)
+            x: 80,
+            y: size.height - (60 + highScoreLabel.frame.size.height)
         )
         addChild(highScoreLabel)
         
@@ -309,6 +310,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score += points
         if let score = childNode(withName: kScoreHudName) as? SKLabelNode {
             score.text = String(format: "Score: %05u", self.score)
+            
+            if highscore < self.score {
+                highscore = self.score
+                if let highscore = childNode(withName: kHighScoreHudName) as? SKLabelNode{
+                    highscore.text = String(format: "Highscore: %05u",self.highscore)
+                }
+            }
         }
         
         
@@ -655,7 +663,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
                 // 2 stop accelerometer
                 motionManager.stopAccelerometerUpdates()
-
+                
                 // 3 show game over scene
                 let gameOverScene: GameOverScene = GameOverScene(size: size)
 
@@ -663,4 +671,3 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 }
-
